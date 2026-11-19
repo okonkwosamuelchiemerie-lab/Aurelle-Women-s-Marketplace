@@ -16,12 +16,12 @@ function pageHome() {
     const orders = db.orders.filter((o) => o.buyerId === user.id);
     const onTheWay = orders.filter((o) => o.status === 'paid' || o.status === 'shipped').length;
     const cartCount = db.cart.reduce((a, c) => a + c.qty, 0);
-    lead = 'Find something you love today. Checkout is coming soon.';
+    lead = 'Find something you love today.';
     tiles = [
       ['#/cart', 'cart', 'My cart', cartCount + (cartCount === 1 ? ' item' : ' items')],
       ['#/dashboard?tab=orders', 'truck', 'My orders', onTheWay + ' on the way'],
       ['#/messages', 'chat', 'Messages', 'Chat with sellers'],
-      ['#/dashboard', 'gift', 'Rewards', 'Coming with checkout'],
+      ['#/dashboard', 'gift', 'Rewards', 'Not active yet'],
     ];
   } else {
     const shop = shopOf(user.id);
@@ -70,7 +70,7 @@ function shopCardHTML(s) {
 function pageAbout() {
   const faqs = [
     ['Can I pay for an order?', 'Not yet. Checkout is disabled, so no payment or order is processed.'],
-    ['When do sellers get paid?', 'Payouts are not enabled. We will publish the payment and payout terms before launch.'],
+    ['When do sellers get paid?', 'Seller payouts are not currently available.'],
     ['How much will sellers be charged?', `The displayed ${pct(COMMISSION.reduced)}% to ${pct(COMMISSION.standard)}% commission is a proposal and is not currently charged.`],
     ['What if my order is fake, damaged or never arrives?', 'Orders and payments are not enabled yet. Contact support with questions.'],
     ['How are sellers reviewed?', 'Seller applications are saved in the live backend. Shops and products appear to buyers after approval.'],
@@ -87,9 +87,9 @@ function pageAbout() {
   <section class="section"><div class="container two-block">
     <div><span class="eyebrow">Our story</span><h2>Why ${esc(BRAND.name)} exists</h2>
       <p>Buying from online boutiques should feel exciting, not risky. Too many shoppers have sent money and waited. Too many honest sellers have lost sales because buyers did not trust them yet.</p>
-      <p>${esc(BRAND.name)} connects buyers and sellers through approved storefronts, product listings and messaging. Secure payments and seller payouts will be enabled only after a provider is configured.</p></div>
+      <p>${esc(BRAND.name)} connects buyers and sellers through approved storefronts, product listings and messaging. Online payments and seller payouts are not currently available.</p></div>
     <div class="about-card"><h3>Our promise</h3><ul class="ticks ticks-dark">
-      <li>${icon('check', 18)} Checkout and payouts are coming soon</li>
+      <li>${icon('check', 18)} Browse independent shops and message sellers</li>
       <li>${icon('check', 18)} Every seller applies and is reviewed</li>
       <li>${icon('check', 18)} Clear, fair commission for sellers</li>
       <li>${icon('check', 18)} Real people to talk to when something goes wrong</li></ul></div>
@@ -98,7 +98,7 @@ function pageAbout() {
   <section class="section section-tint"><div class="container">
     <div class="section-head center"><span class="eyebrow">What we stand for</span><h2>Our values</h2></div>
     <div class="values">
-      ${[['shield', 'Trust', 'We are building secure checkout and seller review.'], ['star', 'Style', 'Clothing for men and women, makeup, skincare, jewelry, bags and shoes, all in one place.'], ['store', 'Community', 'We help independent businesses grow with real customers.'], ['check', 'Fairness', 'Clear terms will be published before launch.']]
+      ${[['shield', 'Trust', 'Approved sellers and direct messaging help shoppers make informed choices.'], ['star', 'Style', 'Clothing for men and women, makeup, skincare, jewelry, bags and shoes, all in one place.'], ['store', 'Community', 'We help independent businesses grow with real customers.'], ['check', 'Fairness', 'Clear terms are available for shoppers and sellers.']]
         .map(([i, t, d]) => `<div class="value"><span class="step-icon">${icon(i, 26)}</span><h3>${t}</h3><p>${d}</p></div>`).join('')}
     </div>
   </div></section>
@@ -107,9 +107,9 @@ function pageAbout() {
     <div><span class="eyebrow">For everyone</span><h2>How ${esc(BRAND.name)} works</h2>
       <ol class="how-list">
         <li><strong>Shoppers</strong> can browse products and chat with sellers.</li>
-        <li><strong>Checkout</strong> is disabled while backend and payment services are prepared.</li>
-        <li><strong>Seller payouts</strong> will be enabled only after a provider and final terms are in place.</li>
-        <li><strong>Loyalty rewards</strong> will begin after checkout is enabled.</li></ol></div>
+        <li><strong>Online purchases</strong> are not currently available through the site.</li>
+        <li><strong>Seller payouts</strong> are not currently available.</li>
+        <li><strong>Loyalty rewards</strong> are not currently active.</li></ol></div>
     <div class="fee-card"><span class="eyebrow">Transparent pricing</span><div class="fee-big">${pct(COMMISSION.reduced)}–${pct(COMMISSION.standard)}%</div>
       <p>commission on each sold item. Nothing else.</p>
       <div class="fee-rows"><div><span>Starting rate</span><strong>${pct(COMMISSION.standard)}%</strong></div><div><span>After ${money(COMMISSION.reducedAfterSales)} in sales</span><strong>${pct(COMMISSION.reduced)}%</strong></div></div></div>
@@ -153,7 +153,7 @@ function pageSignup() {
       <p class="lead">Choose one to get started.</p>
       <div class="role-grid">
         <button class="role-card" data-act="pick-role" data-role="buyer"><span class="role-icon">${icon('cart', 30)}</span><h3>I'm a buyer</h3><p>Browse the collection and chat with sellers. Checkout is not active yet.</p><span class="link-arrow">Continue as buyer ${icon('arrow', 16)}</span></button>
-        <button class="role-card" data-act="pick-role" data-role="seller"><span class="role-icon">${icon('store', 30)}</span><h3>I'm a seller</h3><p>Submit your seller application for review. Shop and product tools are coming soon.</p><span class="link-arrow">Continue as seller ${icon('arrow', 16)}</span></button>
+        <button class="role-card" data-act="pick-role" data-role="seller"><span class="role-icon">${icon('store', 30)}</span><h3>I'm a seller</h3><p>Submit your seller application for review, then set up your shop and list products.</p><span class="link-arrow">Continue as seller ${icon('arrow', 16)}</span></button>
       </div>
       <p class="muted">Already have an account? <a href="#/login"><u>Log in</u></a></p>
     </div></div>`;
@@ -172,7 +172,7 @@ function pageSignup() {
       <div class="agree-box"><strong>Buyer agreement</strong><ul>
         <li>Checkout, order payment, and refunds are not active yet.</li>
         <li>Do not submit real payment or bank details.</li>
-        <li>Loyalty rewards will begin after checkout is enabled.</li></ul>
+        <li>Loyalty rewards are not currently active.</li></ul>
         <label class="check"><input type="checkbox" name="agree"><span>I agree to the above and to the <a href="#/terms" target="_blank"><u>full terms</u></a>.</span></label></div>
       <div class="error" id="form-error" hidden></div>
       <button class="btn btn-primary btn-lg btn-block" type="submit">Create account</button>

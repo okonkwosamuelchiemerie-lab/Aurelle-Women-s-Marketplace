@@ -16,13 +16,13 @@ function pageLanding() {
     <div class="hero-copy">
       <span class="pill pill-gold">Fashion for everyone · Verified sellers</span>
       <h1>Style for everyone, from sellers you can trust.</h1>
-      <p>Men's and women's clothing, makeup, skincare, jewelry, bags and shoes from independent boutiques. Browse the collection and chat with sellers while we prepare secure checkout.</p>
+      <p>Men's and women's clothing, makeup, skincare, jewelry, bags and shoes from independent boutiques. Explore new styles and ask sellers about their products.</p>
       <div class="hero-cta">
         <a href="#/browse" class="btn btn-gold btn-lg">Start shopping ${icon('arrow', 18)}</a>
         <a href="#/signup?role=seller" class="btn btn-outline-light btn-lg">Open your shop</a>
       </div>
       <ul class="hero-points">
-        <li>${icon('shield', 18)} Secure checkout coming soon</li>
+        <li>${icon('store', 18)} Independent boutiques, all in one place</li>
         <li>${icon('chat', 18)} Chat before you buy</li>
         <li>${icon('gift', 18)} Hidden gifts for loyal shoppers</li>
       </ul>
@@ -45,13 +45,13 @@ function pageLanding() {
   </div></section>
 
   <section class="section"><div class="container">
-    <div class="section-head center"><span class="eyebrow">How it works</span><h2>Shopping with total peace of mind</h2>
-      <p class="lead">We are preparing checkout and seller payouts. Payments are not enabled yet.</p></div>
+    <div class="section-head center"><span class="eyebrow">How it works</span><h2>Discover styles and connect with sellers</h2>
+      <p class="lead">Browse products and message sellers directly. Online purchases and payments are not available through the site.</p></div>
     <div class="steps">
-      ${[['chat', '1. Choose & chat', 'Pick what you love and message the seller about sizes, colours or delivery.'],
-         ['lock', '2. Secure checkout', 'Payment integration is being prepared and is not active yet.'],
-         ['truck', '3. Delivery', 'Delivery and order management will be enabled with the live backend.'],
-         ['check', '4. Seller payout', 'Payout and release terms will be published before checkout launches.']]
+      ${[['search', '1. Explore boutiques', 'Browse clothing, beauty and accessories from independent sellers.'],
+         ['chat', '2. Ask the seller', 'Message about sizes, colours, availability or delivery options.'],
+         ['star', '3. Find your style', 'Compare products and discover new favourites.'],
+         ['store', '4. Support local shops', 'Connect directly with the people behind each boutique.']]
         .map(([i, t, d]) => `<div class="step"><span class="step-icon">${icon(i, 26)}</span><h3>${t}</h3><p>${d}</p></div>`).join('')}
     </div>
   </div></section>
@@ -65,7 +65,7 @@ function pageLanding() {
         <li>${icon('check', 18)} Your own shop page with your name and bio</li>
         <li>${icon('check', 18)} Product listings with up to five photos each</li>
         <li>${icon('check', 18)} Chat with buyers directly on the site</li>
-        <li>${icon('check', 18)} Payout setup coming later</li>
+        <li>${icon('check', 18)} Add products and connect with buyers</li>
       </ul>
       <a href="#/signup?role=seller" class="btn btn-gold btn-lg">Become a seller</a>
     </div>
@@ -91,8 +91,8 @@ function pageLanding() {
     <div class="gift-box"><img src="assets/images/gift-box.jpg" alt="A wrapped gift with a pink ribbon"><span>?</span></div>
     <div>
       <span class="eyebrow">Loyalty rewards</span>
-      <h2>Loyalty rewards are coming</h2>
-      <p class="lead">Buyer accounts are ready. Rewards will begin after secure checkout and order tracking are enabled.</p>
+      <h2>Loyalty rewards</h2>
+      <p class="lead">Buyer accounts are ready. The loyalty rewards programme is not active yet.</p>
       <a href="#/signup?role=buyer" class="btn btn-primary btn-lg">Create a buyer account</a>
     </div>
   </div></section>
@@ -211,9 +211,9 @@ function buyerDashboard(user) {
       <div class="stat"><span>Total spent</span><strong>${money(spend)}</strong></div>
       <div class="stat"><span>Orders</span><strong>${orders.length}</strong></div>
       <div class="stat"><span>Awaiting delivery</span><strong>${orders.filter((o) => o.status === 'paid' || o.status === 'shipped').length}</strong></div>
-      <div class="stat"><span>Rewards</span><strong>Coming with checkout</strong></div>
+      <div class="stat"><span>Rewards</span><strong>Not active yet</strong></div>
     </div>
-    <div class="note note-gold">${icon('gift', 18)} <span>Rewards and order history will activate after secure checkout is connected. No purchases are processed yet.</span></div>`;
+    <div class="note note-gold">${icon('gift', 18)} <span>Rewards and order history are not active. No purchases are processed through the site.</span></div>`;
   } else if (tab === 'orders') {
     body = `<div class="olist">
       <div class="note note-gold">${icon('shield', 18)} <span>Checkout is disabled, so no new orders can be placed or payments collected.</span></div>
@@ -364,6 +364,6 @@ function pageTerms() {
     <h2>5. Buyer responsibilities</h2>
     <p>Buyers must provide a correct delivery address and confirm receipt only when goods are in hand.</p>
     <h2>6. Loyalty rewards</h2>
-    <p>Loyalty rewards are planned, but are not available until secure checkout and order tracking are enabled.</p>
+    <p>Loyalty rewards are not currently active.</p>
   </div>`;
 }
