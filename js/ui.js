@@ -5,6 +5,7 @@ const esc = (s) => String(s == null ? '' : s).replace(/[&<>"']/g, (c) => ({ '&':
 const ICONS = {
   dresses: '<path d="M9 4h6l1 4 3 2-2 11H7L5 10l3-2z"/><path d="M9 4c0 2 1 3 3 3s3-1 3-3"/>',
   clothes: '<path d="M12 9V7.5a2 2 0 1 0-2-2"/><path d="M12 9l9 7a1 1 0 0 1-.6 1.8H3.6A1 1 0 0 1 3 16z"/>',
+  menswear: '<path d="M8 4 12 6l4-2 5 4-3 4-2-1v9H8v-9l-2 1-3-4z"/><path d="M10 5.2 12 8l2-2.8"/>',
   makeup: '<rect x="8.5" y="12" width="7" height="9" rx="1"/><rect x="9.5" y="8" width="5" height="4"/><path d="M9.5 8l2.5-5 2.5 5"/>',
   jewelry: '<path d="M6 3h12l4 6-10 12L2 9z"/><path d="M2 9h20M9 3l3 6 3-6M12 21L9 9M12 21l3-12"/>',
   bags: '<path d="M5 8h14l1 13H4z"/><path d="M9 8V6a3 3 0 0 1 6 0v2"/>',
@@ -192,7 +193,7 @@ function headerHTML(ui, route) {
 function footerHTML() {
   return `
   <div class="container footer-grid">
-    <div>${logo(true)}<p class="footer-about">${esc(BRAND.name)} is a women's marketplace. Accounts, approved shops, product listings, image uploads and buyer-seller messages use Supabase. Checkout, orders and payouts are not enabled.</p></div>
+    <div>${logo(true)}<p class="footer-about">${esc(BRAND.name)} is a fashion and beauty marketplace for everyone. Accounts, approved shops, product listings, image uploads and buyer-seller messages use Supabase. Checkout, orders and payouts are not enabled.</p></div>
     <div><h4>Shop</h4>${CATEGORIES.map((c) => `<a href="#/browse?cat=${c.id}">${c.label}</a>`).join('')}</div>
     <div><h4>${esc(BRAND.name)}</h4><a href="#/about">About us</a><a href="#/signup?role=seller">Become a seller</a><a href="#/terms">Terms &amp; service status</a><a href="#/terms?s=commission">Commission proposal</a></div>
     <div><h4>Contact us</h4>

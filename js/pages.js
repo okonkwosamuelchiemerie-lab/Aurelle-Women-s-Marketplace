@@ -14,9 +14,9 @@ function pageLanding() {
   return `
   <section class="hero"><div class="container hero-grid">
     <div class="hero-copy">
-      <span class="pill pill-gold">Women's marketplace · Verified sellers</span>
-      <h1>Everything she loves, from sellers you can trust.</h1>
-      <p>Dresses, two-piece sets, skirts, makeup, skincare, jewelry, bags and shoes from independent boutiques. Browse the collection and chat with sellers while we prepare secure checkout.</p>
+      <span class="pill pill-gold">Fashion for everyone · Verified sellers</span>
+      <h1>Style for everyone, from sellers you can trust.</h1>
+      <p>Men's and women's clothing, makeup, skincare, jewelry, bags and shoes from independent boutiques. Browse the collection and chat with sellers while we prepare secure checkout.</p>
       <div class="hero-cta">
         <a href="#/browse" class="btn btn-gold btn-lg">Start shopping ${icon('arrow', 18)}</a>
         <a href="#/signup?role=seller" class="btn btn-outline-light btn-lg">Open your shop</a>

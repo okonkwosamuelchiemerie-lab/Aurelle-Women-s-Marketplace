@@ -79,8 +79,8 @@ function pageAbout() {
   return `
   <section class="about-hero"><div class="container">
     <span class="eyebrow eyebrow-light">About us</span>
-    <h1>A marketplace for women's fashion &amp; beauty in Nigeria.</h1>
-    <p>${esc(BRAND.name)} brings dress and clothing boutiques, makeup artists, jewelers and accessory sellers together in one marketplace. Buyers can browse approved sellers and message them; checkout and payouts are not enabled yet.</p>
+    <h1>A marketplace for fashion &amp; beauty for everyone in Nigeria.</h1>
+    <p>${esc(BRAND.name)} brings men's and women's clothing boutiques, makeup artists, jewelers and accessory sellers together in one marketplace. Buyers can browse approved sellers and message them; checkout and payouts are not enabled yet.</p>
     <div class="hero-cta"><a href="#/browse" class="btn btn-gold btn-lg">Start shopping</a><a href="#/signup?role=seller" class="btn btn-outline-light btn-lg">Become a seller</a></div>
   </div></section>
 
@@ -98,7 +98,7 @@ function pageAbout() {
   <section class="section section-tint"><div class="container">
     <div class="section-head center"><span class="eyebrow">What we stand for</span><h2>Our values</h2></div>
     <div class="values">
-      ${[['shield', 'Trust', 'We are building secure checkout and seller review.'], ['star', 'Style', 'Dresses, sets, skirts, makeup, skincare, jewelry, bags and shoes, all in one place.'], ['store', 'Community', 'We help small women-led businesses grow with real customers.'], ['check', 'Fairness', 'Clear terms will be published before launch.']]
+      ${[['shield', 'Trust', 'We are building secure checkout and seller review.'], ['star', 'Style', 'Clothing for men and women, makeup, skincare, jewelry, bags and shoes, all in one place.'], ['store', 'Community', 'We help independent businesses grow with real customers.'], ['check', 'Fairness', 'Clear terms will be published before launch.']]
         .map(([i, t, d]) => `<div class="value"><span class="step-icon">${icon(i, 26)}</span><h3>${t}</h3><p>${d}</p></div>`).join('')}
     </div>
   </div></section>

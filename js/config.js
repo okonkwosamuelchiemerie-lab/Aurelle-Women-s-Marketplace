@@ -10,7 +10,7 @@ const SUPABASE_PUBLISHABLE_KEY = 'sb_publishable_KPz--PLAo-hEfUoopQ3AIg_OTuNe9bJ
 
 const BRAND = {
   name: 'Aurelle',
-  tagline: "Where every woman's style lives",
+  tagline: "Where everyone's style lives",
   currency: '₦',
   supportEmail: ADMIN_EMAIL,
   phone: '+2348163013017',
@@ -33,6 +33,7 @@ const AUTO_RELEASE_DAYS = 5;
 const CATEGORIES = [
   { id: 'dresses', label: 'Dresses', blurb: 'Ankara, occasion & everyday dresses' },
   { id: 'clothes', label: 'Clothes', blurb: 'Two-piece sets, skirts & everyday wear' },
+  { id: 'menswear', label: "Men's clothing", blurb: 'Shirts, trousers, suits & more' },
   { id: 'makeup', label: 'Makeup', blurb: 'Kits, lips, palettes & more' },
   { id: 'jewelry', label: 'Jewelry', blurb: 'Necklaces, rings & earrings' },
   { id: 'bags', label: 'Bags', blurb: 'Totes, crossbody & clutches' },

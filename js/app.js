@@ -62,7 +62,7 @@ function render() {
   $('#footer').innerHTML = footerHTML();
   const cb = $('#chat-body');
   if (cb) cb.scrollTop = cb.scrollHeight;
-  document.title = BRAND.name + ' — Women\'s Marketplace';
+  document.title = BRAND.name + ' — Fashion & Beauty for Everyone';
 }
 
 function onNavigate() {

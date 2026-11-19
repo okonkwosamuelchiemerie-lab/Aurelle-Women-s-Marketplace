@@ -3,7 +3,7 @@
 > Sellers can replace a product's photos from Dashboard -> Products -> Change photos.
 > Being signed in now survives session renewals (no more bounce to the login page).
 
-# Aurelle — Women's Marketplace (front end)
+# Aurelle — Unisex Fashion & Beauty Marketplace (front end)
 
 Plain HTML + CSS + JavaScript. No install, no build step.
 Colours: light brown, brown and white (edit them at the top of `css/styles.css` under `:root`).
