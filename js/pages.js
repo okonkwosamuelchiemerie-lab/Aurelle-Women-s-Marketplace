@@ -16,7 +16,7 @@ function pageLanding() {
     <div class="hero-copy">
       <span class="pill pill-gold">Fashion for everyone · Verified sellers</span>
       <h1>Style for everyone, from sellers you can trust.</h1>
-      <p>Men's and women's clothing, makeup, skincare, jewelry, bags and shoes from independent boutiques. Explore new styles and ask sellers about their products.</p>
+      <p>Men's and women's clothing, makeup, skincare, jewelry, watches, bags and shoes from independent boutiques. Explore new styles and ask sellers about their products.</p>
       <div class="hero-cta">
         <a href="#/browse" class="btn btn-gold btn-lg">Start shopping ${icon('arrow', 18)}</a>
         <a href="#/signup?role=seller" class="btn btn-outline-light btn-lg">Open your shop</a>
@@ -191,8 +191,56 @@ function pageLogin() {
       <div class="error" id="form-error" hidden></div>
       <button class="btn btn-primary btn-lg btn-block" type="submit">Log in</button>
     </form>
-    <p class="muted center small" style="margin:14px 0">New here? <a href="#/signup"><u>Create an account</u></a></p>
+    <p class="muted center small" style="margin:14px 0 4px"><a href="#/forgot"><u>Forgot your password?</u></a></p>
+    <p class="muted center small" style="margin:4px 0 14px">New here? <a href="#/signup"><u>Create an account</u></a></p>
   </div></div>`;
+}
+
+function pageForgot() {
+  return `
+  <div class="auth-wrap"><div class="auth-card">
+    <h1>Reset your password</h1>
+    <p class="muted small">Enter the email you signed up with. We will send you a link to choose a new password.</p>
+    <form data-form="forgot">
+      <label class="field"><span>Email</span><input name="email" type="email" required></label>
+      <div class="error" id="form-error" hidden></div>
+      <button class="btn btn-primary btn-lg btn-block" type="submit">Send reset link</button>
+    </form>
+    <p class="muted center small" style="margin:14px 0"><a href="#/login"><u>Back to log in</u></a></p>
+  </div></div>`;
+}
+
+function pageReset() {
+  if (!isAuthReady()) return '<div class="container page narrow"><p>Checking your reset link…</p></div>';
+  if (!me()) return `
+  <div class="auth-wrap"><div class="auth-card">
+    <h1>This link has expired</h1>
+    <p class="muted small">Reset links work once and only for a short time. Request a new one.</p>
+    <a class="btn btn-primary btn-block" href="#/forgot">Get a new link</a>
+  </div></div>`;
+  return `
+  <div class="auth-wrap"><div class="auth-card">
+    <h1>Choose a new password</h1>
+    <form data-form="reset">
+      <label class="field"><span>New password</span><input name="password" type="password" minlength="8" required placeholder="At least 8 characters"></label>
+      <label class="field"><span>Repeat new password</span><input name="again" type="password" minlength="8" required></label>
+      <div class="error" id="form-error" hidden></div>
+      <button class="btn btn-primary btn-lg btn-block" type="submit">Save new password</button>
+    </form>
+  </div></div>`;
+}
+
+// Used on the buyer profile, seller shop and admin settings screens.
+function passwordCardHTML() {
+  return `
+    <form class="card form-card narrow-card" data-form="change-password">
+      <h3>Change your password</h3>
+      <label class="field"><span>Current password</span><input name="current" type="password" autocomplete="current-password" required></label>
+      <label class="field"><span>New password</span><input name="next" type="password" minlength="8" autocomplete="new-password" required placeholder="At least 8 characters"></label>
+      <label class="field"><span>Repeat new password</span><input name="again" type="password" minlength="8" autocomplete="new-password" required></label>
+      <div class="error" id="pw-error" hidden></div>
+      <button class="btn btn-outline" type="submit">Update password</button>
+    </form>`;
 }
 
 function uploaderHTML() {
@@ -226,7 +274,8 @@ function buyerDashboard(user) {
       <div class="field"><span>Phone</span><div>${esc(user.phone)}</div></div>
       <label class="field"><span>Default delivery address</span><textarea name="address" rows="3" placeholder="House number, street, area, city">${esc(user.address)}</textarea></label>
       <button class="btn btn-primary" type="submit">Save</button>
-    </form>`;
+    </form>
+    ${passwordCardHTML()}`;
   }
   return `
   <div class="container page">

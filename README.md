@@ -58,6 +58,8 @@ To merge the Dresses and Clothes categories into Women's clothing while preservi
 `supabase/migrations/20261119_clothing_categories.sql` in the Supabase SQL Editor.
 To replace Face Masks with Underwear and recategorize existing records, run
 `supabase/migrations/20261119_underwear_category.sql` in the Supabase SQL Editor.
+If users appear under Supabase Authentication but not in the admin panel, run
+`supabase/migrations/20261119_admin_list_users.sql` in the Supabase SQL Editor.
 
 Users appear under **Authentication → Users** after they sign up; email confirmation may be required before they can log
 in. Seller application details are saved to `public.seller_applications`.

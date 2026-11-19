@@ -41,6 +41,8 @@ function viewHTML() {
     case 'shop': return pageShop(b);
     case 'signup': return pageSignup();
     case 'login': return pageLogin();
+    case 'forgot': return pageForgot();
+    case 'reset': return pageReset();
     case 'dashboard': return pageDashboard();
     case 'cart': return pageCart();
     case 'checkout': return pageCheckout();
@@ -305,6 +307,7 @@ document.addEventListener('change', async (e) => {
 });
 
 /* ───────────── forms ───────────── */
+function showPwError(msg) { const el = $('#pw-error'); if (el) { el.textContent = msg; el.hidden = false; } }
 function showError(msg) { const el = $('#form-error'); if (el) { el.textContent = msg; el.hidden = false; el.scrollIntoView({ block: 'center' }); } }
 
 document.addEventListener('submit', async (e) => {
@@ -369,6 +372,37 @@ document.addEventListener('submit', async (e) => {
       notify(shop.verified === 'verified'
         ? '"' + f.name.trim() + '" is now live. Add another!'
         : '"' + f.name.trim() + '" is saved and will be visible after shop approval.');
+      break;
+    }
+    case 'forgot': {
+      let r;
+      try { r = await actions.requestPasswordReset(f.email); }
+      catch (error) { return showError('Could not send the email: ' + error.message); }
+      if (!r.ok) return showError(/rate limit/i.test(r.error) ? 'Too many emails were sent just now. Please wait a few minutes and try again.' : r.error);
+      form.innerHTML = '<p>If an account exists for that email, a reset link is on its way. Check your inbox and spam folder.</p><p class="muted small"><a href="#/login"><u>Back to log in</u></a></p>';
+      break;
+    }
+    case 'reset': {
+      if (f.password.length < 8) return showError('Use at least 8 characters.');
+      if (f.password !== f.again) return showError('The two passwords do not match.');
+      let r;
+      try { r = await actions.setNewPassword(f.password); }
+      catch (error) { return showError('Could not save the password: ' + error.message); }
+      if (!r.ok) return showError(r.error);
+      notify('Password updated. You are logged in.');
+      go('/dashboard');
+      break;
+    }
+    case 'change-password': {
+      if (f.next.length < 8) return showPwError('Use at least 8 characters.');
+      if (f.next !== f.again) return showPwError('The two new passwords do not match.');
+      if (f.next === f.current) return showPwError('Choose a password different from the current one.');
+      let r;
+      try { r = await actions.changePassword(f.current, f.next); }
+      catch (error) { return showPwError('Could not change the password: ' + error.message); }
+      if (!r.ok) return showPwError(r.error);
+      form.reset();
+      notify('Password changed');
       break;
     }
     case 'update-profile':

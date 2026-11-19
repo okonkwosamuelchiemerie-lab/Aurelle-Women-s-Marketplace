@@ -396,7 +396,8 @@ function sellerDashboard(user) {
       <label class="field"><span>What you sell</span><input name="whatSells" value="${esc(shop.whatSells)}"></label>
       <label class="field"><span>Instagram / TikTok / website</span><input name="social" value="${esc(shop.social || '')}"></label>
       <button class="btn btn-primary" type="submit">Save changes</button>
-    </form>`;
+    </form>
+    ${passwordCardHTML()}`;
   }
   return `
   <div class="container page">
@@ -523,6 +524,7 @@ function pageAdmin() {
   } else {
     body = `
     <div class="settings-grid">
+      ${passwordCardHTML()}
       <div class="card form-card">
         <h3>Admin access</h3>
         <p class="muted">Admin roles are managed in Supabase. Never use a browser-stored password or grant admin access from the storefront.</p>

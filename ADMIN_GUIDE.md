@@ -16,9 +16,17 @@
 - In Supabase: **Authentication -> Users** (email, sign-up date, last login).
 - Seller applications: Supabase **Table Editor -> seller_applications**. Approve shops on the site: Admin -> **Sellers**.
 
+If a user appears under Supabase **Authentication -> Users** but not in the admin panel, run
+`supabase/migrations/20261119_admin_list_users.sql` in the SQL Editor, then refresh the site. It installs the admin user-list function and creates missing profile rows for existing Auth users.
+
 ## 3. See what happens on your site
 - **Orders and payments:** Supabase Table Editor -> `orders` and `payments` (or Admin -> Orders on the site).
 - **Messages:** Table Editor -> `messages`.
 - **Errors in checkout:** Supabase -> **Edge Functions** -> pick a function -> **Logs**.
 - **Money:** Paystack dashboard -> Transactions (switch to Test mode while testing).
 - **Visitors:** Netlify -> your site -> Analytics (paid add-on); free alternative is adding Google Analytics later.
+
+## Passwords
+- Forgot password: login page -> "Forgot your password?" (needs Supabase email: Authentication -> Emails -> SMTP Settings).
+- Change password: buyer Profile tab, seller Shop tab, Admin -> Settings.
+- Emergency reset by SQL (SQL Editor): update auth.users set encrypted_password = extensions.crypt('NewPassword1', extensions.gen_salt('bf')) where email = 'someone@mail.com' returning email;

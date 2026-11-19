@@ -416,6 +416,8 @@ async function initializeAuth() {
   supabaseClient.auth.onAuthStateChange((event, session) => {
     // The first load is handled by getSession() below; a silent token refresh changes nothing for the visitor.
     if (event === 'INITIAL_SESSION' || event === 'TOKEN_REFRESHED') return;
+    // Arriving from a "reset my password" email: show the page where they choose a new password.
+    if (event === 'PASSWORD_RECOVERY') window.setTimeout(() => { location.hash = '#/reset'; }, 150);
     window.setTimeout(() => {
       setAuthSession(session).then((result) => {
         if (!result.ok) notify(result.error, 'error');
@@ -570,6 +572,24 @@ const actions = {
     if (error) return { ok: false, error: error.message };
     const result = await setAuthSession(data.session);
     return result.ok ? { ok: true, user: result.user } : result;
+  },
+  async requestPasswordReset(email) {
+    if (!supabaseClient) return { ok: false, error: 'Supabase did not load. Refresh the page and try again.' };
+    const { error } = await supabaseClient.auth.resetPasswordForEmail(email.trim().toLowerCase(), {
+      redirectTo: window.location.origin + window.location.pathname,
+    });
+    return error ? { ok: false, error: error.message } : { ok: true };
+  },
+  async setNewPassword(password) {
+    if (!supabaseClient) return { ok: false, error: 'Supabase did not load. Refresh the page and try again.' };
+    const { error } = await supabaseClient.auth.updateUser({ password });
+    return error ? { ok: false, error: error.message } : { ok: true };
+  },
+  async changePassword(current, next) {
+    if (!supabaseClient || !authProfile) return { ok: false, error: 'Please log in again.' };
+    const check = await supabaseClient.auth.signInWithPassword({ email: authProfile.email, password: current });
+    if (check.error) return { ok: false, error: 'Your current password is not correct.' };
+    return actions.setNewPassword(next);
   },
   async logout() {
     if (!supabaseClient) return { ok: false, error: 'Supabase did not load. Refresh the page and try again.' };

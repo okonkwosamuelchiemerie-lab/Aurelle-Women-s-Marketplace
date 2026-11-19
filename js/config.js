@@ -34,7 +34,7 @@ const CATEGORIES = [
   { id: 'womenswear', label: "Women's clothing", blurb: 'Dresses, tops, skirts & more' },
   { id: 'menswear', label: "Men's clothing", blurb: 'Shirts, trousers, suits & more' },
   { id: 'makeup', label: 'Makeup', blurb: 'Kits, lips, palettes & more' },
-  { id: 'jewelry', label: 'Jewelry', blurb: 'Necklaces, rings & earrings' },
+  { id: 'jewelry', label: 'Jewelry & Watches', blurb: 'Necklaces, rings, watches & more' },
   { id: 'bags', label: 'Bags', blurb: 'Totes, crossbody & clutches' },
   { id: 'shoes', label: 'Shoes', blurb: 'Heels, flats & sandals' },
   { id: 'underwear', label: 'Underwear', blurb: 'Bras, briefs, sets & more' },
