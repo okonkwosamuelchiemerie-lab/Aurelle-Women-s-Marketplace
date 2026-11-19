@@ -54,6 +54,8 @@ add the seller application fields and update the new-user trigger, then run
 `supabase/migrations/20261117_live_marketplace.sql` to enable shop creation, approved-shop visibility, and admin tools.
 If the site reports that it cannot load message contacts or find `message_contacts()`, run
 `supabase/migrations/20261119_message_contacts.sql` in the Supabase SQL Editor.
+To merge the Dresses and Clothes categories into Women's clothing while preserving existing listings, run
+`supabase/migrations/20261119_clothing_categories.sql` in the Supabase SQL Editor.
 
 Users appear under **Authentication → Users** after they sign up; email confirmation may be required before they can log
 in. Seller application details are saved to `public.seller_applications`.

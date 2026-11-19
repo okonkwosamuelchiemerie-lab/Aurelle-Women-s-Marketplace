@@ -64,16 +64,16 @@ function seed() {
   const mk = (id, name, email) => ({ id, name, email, phone: '0801000000' + id.slice(-1), password: 'demo123', role: 'seller', createdAt: t, address: '' });
   const users = [mk('u_s1', 'Zuri Okafor', 'zuri@demo.com'), mk('u_s2', 'Amara Eze', 'amara@demo.com'), mk('u_s3', 'Ifeoma Bello', 'ifeoma@demo.com'), mk('u_s4', 'Tolu Adeyemi', 'tolu@demo.com')];
   const shops = [
-    { id: 's_1', ownerId: 'u_s1', name: 'Zuri Atelier', city: 'Lagos', categories: ['dresses', 'clothes'], bio: 'Contemporary African-inspired dresses, sets and skirts, tailored in small batches. Every piece is made to make you feel unforgettable.', whatSells: 'Ankara and satin dresses, two-piece sets, skirts' },
+    { id: 's_1', ownerId: 'u_s1', name: 'Zuri Atelier', city: 'Lagos', categories: ['womenswear'], bio: 'Contemporary African-inspired dresses, sets and skirts, tailored in small batches. Every piece is made to make you feel unforgettable.', whatSells: 'Ankara and satin dresses, two-piece sets, skirts' },
     { id: 's_2', ownerId: 'u_s2', name: 'Glow by Amara', city: 'Abuja', categories: ['makeup', 'masks'], bio: 'Makeup kits and skincare masks for every skin tone. Original products only, always sealed.', whatSells: 'Makeup kits, lipsticks, face masks' },
     { id: 's_3', ownerId: 'u_s3', name: 'Ivory & Gold', city: 'Lagos', categories: ['jewelry'], bio: 'Delicate, everyday jewelry in gold-tone and freshwater pearl. Gift-ready packaging on every order.', whatSells: 'Necklaces, earrings, rings' },
     { id: 's_4', ownerId: 'u_s4', name: 'Bella Totes & Steps', city: 'Port Harcourt', categories: ['bags', 'shoes'], bio: 'Handbags and heels that go from office to owambe. Quality leather, comfortable fits.', whatSells: 'Handbags, heels, sandals' },
   ];
   const list = [
-    ['s_1', 'Ankara Wrap Midi Dress', 'dresses', 18500, 12, 'A flattering wrap silhouette in a bold hand-finished Ankara print. Fully lined, adjustable tie waist. Available in sizes 8 to 18.'],
-    ['s_1', 'Satin Slip Dress', 'dresses', 24000, 8, 'Liquid-soft satin with a bias cut and adjustable straps. Perfect for dinners and date nights.'],
-    ['s_1', 'Linen Two-Piece Set', 'clothes', 21000, 10, 'Breathable linen crop top and high-waist trousers. Effortless, polished and comfortable.'],
-    ['s_1', 'Pleated Maxi Skirt', 'clothes', 12500, 15, 'Flowing pleats with a soft elastic waist. Pairs with anything in your wardrobe.'],
+    ['s_1', 'Ankara Wrap Midi Dress', 'womenswear', 18500, 12, 'A flattering wrap silhouette in a bold hand-finished Ankara print. Fully lined, adjustable tie waist. Available in sizes 8 to 18.'],
+    ['s_1', 'Satin Slip Dress', 'womenswear', 24000, 8, 'Liquid-soft satin with a bias cut and adjustable straps. Perfect for dinners and date nights.'],
+    ['s_1', 'Linen Two-Piece Set', 'womenswear', 21000, 10, 'Breathable linen crop top and high-waist trousers. Effortless, polished and comfortable.'],
+    ['s_1', 'Pleated Maxi Skirt', 'womenswear', 12500, 15, 'Flowing pleats with a soft elastic waist. Pairs with anything in your wardrobe.'],
     ['s_2', 'Velvet Matte Lipstick Set (6pc)', 'makeup', 9500, 30, 'Six long-wearing matte shades from nude to berry. Enriched with vitamin E so lips stay soft.'],
     ['s_2', 'Full Glam Makeup Kit', 'makeup', 32000, 6, 'Everything you need: foundation, concealer, palette, brushes, lashes and setting spray in a travel case.'],
     ['s_2', 'Glow Highlighter Palette', 'makeup', 8000, 20, 'Four buildable highlighters from soft champagne to deep bronze. Lights up every skin tone.'],
@@ -129,8 +129,8 @@ function loadDB() {
       if (hadPayoutDetails) data.shops.forEach((shop) => { delete shop.bank; });
       if (hadLocalAdmin || hadPayoutDetails) localStorage.setItem(DB_KEY, JSON.stringify(data));
       const demoShopIds = data.shops.filter((shop) => shop.demo).map((shop) => shop.id);
-      const dresses = data.products.filter((product) => demoShopIds.includes(product.shopId) && product.category === 'clothes' && /dress/i.test(product.name));
       data.products.forEach((product) => {
+        if (product.category === 'dresses' || product.category === 'clothes') product.category = 'womenswear';
         const image = DEFAULT_PRODUCT_IMAGES[product.name];
         const legacyImage = LEGACY_DEFAULT_PRODUCT_IMAGES[product.name];
         const images = product.images || [];
@@ -138,14 +138,11 @@ function loadDB() {
           product.images = [image].concat(images.slice(1));
         }
       });
-      if (dresses.length) {
-        dresses.forEach((product) => { product.category = 'dresses'; });
-        data.shops.forEach((shop) => {
-          if (demoShopIds.includes(shop.id) && shop.categories.includes('clothes') && !shop.categories.includes('dresses')) {
-            shop.categories.unshift('dresses');
-          }
-        });
-      }
+      data.shops.forEach((shop) => {
+        if (!(shop.categories || []).some((category) => category === 'dresses' || category === 'clothes')) return;
+        const categories = shop.categories.map((category) => category === 'dresses' || category === 'clothes' ? 'womenswear' : category);
+        shop.categories = categories.filter((category, index) => categories.indexOf(category) === index);
+      });
       data.shops.forEach((shop) => {
         const legacyCover = LEGACY_DEFAULT_SHOP_COVERS[shop.id];
         if (demoShopIds.includes(shop.id) && (!shop.cover || (legacyCover && shop.cover === legacyCover))) {

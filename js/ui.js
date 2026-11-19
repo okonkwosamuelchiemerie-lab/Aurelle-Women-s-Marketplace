@@ -5,6 +5,7 @@ const esc = (s) => String(s == null ? '' : s).replace(/[&<>"']/g, (c) => ({ '&':
 const ICONS = {
   dresses: '<path d="M9 4h6l1 4 3 2-2 11H7L5 10l3-2z"/><path d="M9 4c0 2 1 3 3 3s3-1 3-3"/>',
   clothes: '<path d="M12 9V7.5a2 2 0 1 0-2-2"/><path d="M12 9l9 7a1 1 0 0 1-.6 1.8H3.6A1 1 0 0 1 3 16z"/>',
+  womenswear: '<path d="M9 4h6l1 4 3 2-2 11H7L5 10l3-2z"/><path d="M9 4c0 2 1 3 3 3s3-1 3-3"/>',
   menswear: '<path d="M8 4 12 6l4-2 5 4-3 4-2-1v9H8v-9l-2 1-3-4z"/><path d="M10 5.2 12 8l2-2.8"/>',
   makeup: '<rect x="8.5" y="12" width="7" height="9" rx="1"/><rect x="9.5" y="8" width="5" height="4"/><path d="M9.5 8l2.5-5 2.5 5"/>',
   jewelry: '<path d="M6 3h12l4 6-10 12L2 9z"/><path d="M2 9h20M9 3l3 6 3-6M12 21L9 9M12 21l3-12"/>',
@@ -104,10 +105,15 @@ function illustration(cat, c1, c2) {
   const W = 'rgba(255,255,255,.95)', W2 = 'rgba(255,255,255,.7)', G = '#a9744f', D = 'rgba(70,40,20,.2)';
   const bg = '<circle cx="168" cy="44" r="72" fill="rgba(255,255,255,.18)"/><circle cx="20" cy="228" r="62" fill="rgba(255,255,255,.14)"/>';
   const floor = '<ellipse cx="100" cy="228" rx="54" ry="7" fill="rgba(0,0,0,.14)"/>';
-  const shapes = {
-    clothes: `<path d="M84 36 L100 66 L116 36 L127 43 L121 104 L154 212 Q100 234 46 212 L79 104 L73 43 Z" fill="${W}"/>
+  const clothingShape = `<path d="M84 36 L100 66 L116 36 L127 43 L121 104 L154 212 Q100 234 46 212 L79 104 L73 43 Z" fill="${W}"/>
       <path d="M79 104 Q100 116 121 104 L122 116 Q100 128 78 116 Z" fill="${G}"/>
-      <path d="M92 128 L70 214 M108 128 L130 214 M100 130 L100 222" stroke="${D}" stroke-width="2" fill="none"/>`,
+      <path d="M92 128 L70 214 M108 128 L130 214 M100 130 L100 222" stroke="${D}" stroke-width="2" fill="none"/>`;
+  const shapes = {
+    clothes: clothingShape,
+    womenswear: clothingShape,
+    menswear: `<path d="M77 36 100 48 123 36 151 54 138 88 125 80 130 216H70L75 80 62 88 49 54Z" fill="${W}"/>
+      <path d="M100 48v168M91 68l9 10 9-10" stroke="${G}" stroke-width="3" fill="none"/>
+      <circle cx="100" cy="98" r="2" fill="${G}"/><circle cx="100" cy="122" r="2" fill="${G}"/><circle cx="100" cy="146" r="2" fill="${G}"/>`,
     makeup: `<rect x="62" y="150" width="36" height="64" rx="5" fill="${W}"/>
       <rect x="62" y="132" width="36" height="20" rx="3" fill="${G}"/>
       <path d="M67 132 V100 Q67 86 80 78 Q93 86 93 100 V132 Z" fill="#8f4a32"/>

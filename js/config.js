@@ -31,8 +31,7 @@ const COMMISSION = {
 const AUTO_RELEASE_DAYS = 5;
 
 const CATEGORIES = [
-  { id: 'dresses', label: 'Dresses', blurb: 'Ankara, occasion & everyday dresses' },
-  { id: 'clothes', label: 'Clothes', blurb: 'Two-piece sets, skirts & everyday wear' },
+  { id: 'womenswear', label: "Women's clothing", blurb: 'Dresses, tops, skirts & more' },
   { id: 'menswear', label: "Men's clothing", blurb: 'Shirts, trousers, suits & more' },
   { id: 'makeup', label: 'Makeup', blurb: 'Kits, lips, palettes & more' },
   { id: 'jewelry', label: 'Jewelry', blurb: 'Necklaces, rings & earrings' },

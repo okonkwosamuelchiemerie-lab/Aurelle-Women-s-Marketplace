@@ -207,7 +207,7 @@ function sellerApplicationHTML() {
       </div>
       <label class="field"><span>CAC registration number <em class="muted small">(optional, if registered)</em></span><input name="cac" value="${v('cac')}" placeholder="e.g. RC1234567 or BN1234567"></label>
       <div class="field"><span>What do you sell? (pick all that apply)</span>${checks('categories', CATEGORIES)}</div>
-      <label class="field"><span>List your main products</span><input name="whatSells" required value="${v('whatSells')}" placeholder="e.g. Ankara dresses, two-piece sets, skirts"></label>
+      <label class="field"><span>List your main products</span><input name="whatSells" required value="${v('whatSells')}" placeholder="e.g. Men's shirts, women's dresses, skirts"></label>
       <label class="field"><span>Tell buyers about your business</span><textarea name="bio" rows="4" required placeholder="Who you are, what makes your products special, and what customers can expect.">${v('bio')}</textarea></label>
       <label class="field"><span>Instagram / TikTok / website <em class="muted small">(optional)</em></span><input name="social" value="${v('social')}" placeholder="e.g. @yourbusiness"></label>`;
   } else if (step === 3) {
@@ -311,7 +311,7 @@ function sellerDashboard(user) {
         <label class="field"><span>Shop name</span><input name="name" required placeholder="e.g. Zuri Atelier"></label>
         <label class="field"><span>City</span><input name="city" required placeholder="e.g. Lagos"></label>
         <label class="field"><span>Shop bio</span><textarea name="bio" rows="4" required placeholder="Tell buyers who you are and what makes your products special."></textarea></label>
-        <label class="field"><span>What do you sell?</span><input name="whatSells" required placeholder="e.g. Dresses, two-piece sets, skirts"></label>
+        <label class="field"><span>What do you sell?</span><input name="whatSells" required placeholder="e.g. Men's shirts, women's dresses, skirts"></label>
         <div class="field"><span>Categories (pick at least one)</span>
           <div class="chips">${CATEGORIES.map((c) => `<label class="chip-check"><input type="checkbox" name="cat" value="${c.id}"><span>${c.label}</span></label>`).join('')}</div></div>
         <div class="error" id="form-error" hidden></div>
