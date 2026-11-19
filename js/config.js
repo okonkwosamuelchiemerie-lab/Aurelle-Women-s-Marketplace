@@ -37,7 +37,7 @@ const CATEGORIES = [
   { id: 'jewelry', label: 'Jewelry', blurb: 'Necklaces, rings & earrings' },
   { id: 'bags', label: 'Bags', blurb: 'Totes, crossbody & clutches' },
   { id: 'shoes', label: 'Shoes', blurb: 'Heels, flats & sandals' },
-  { id: 'masks', label: 'Face Masks', blurb: 'Skin-loving masks & care' },
+  { id: 'underwear', label: 'Underwear', blurb: 'Bras, briefs, sets & more' },
 ];
 
 // Loyalty: total spent unlocks tiers and a hidden gift.

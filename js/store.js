@@ -65,7 +65,7 @@ function seed() {
   const users = [mk('u_s1', 'Zuri Okafor', 'zuri@demo.com'), mk('u_s2', 'Amara Eze', 'amara@demo.com'), mk('u_s3', 'Ifeoma Bello', 'ifeoma@demo.com'), mk('u_s4', 'Tolu Adeyemi', 'tolu@demo.com')];
   const shops = [
     { id: 's_1', ownerId: 'u_s1', name: 'Zuri Atelier', city: 'Lagos', categories: ['womenswear'], bio: 'Contemporary African-inspired dresses, sets and skirts, tailored in small batches. Every piece is made to make you feel unforgettable.', whatSells: 'Ankara and satin dresses, two-piece sets, skirts' },
-    { id: 's_2', ownerId: 'u_s2', name: 'Glow by Amara', city: 'Abuja', categories: ['makeup', 'masks'], bio: 'Makeup kits and skincare masks for every skin tone. Original products only, always sealed.', whatSells: 'Makeup kits, lipsticks, face masks' },
+    { id: 's_2', ownerId: 'u_s2', name: 'Glow by Amara', city: 'Abuja', categories: ['makeup', 'underwear'], bio: 'Makeup kits and skincare masks for every skin tone. Original products only, always sealed.', whatSells: 'Makeup kits, lipsticks, face masks' },
     { id: 's_3', ownerId: 'u_s3', name: 'Ivory & Gold', city: 'Lagos', categories: ['jewelry'], bio: 'Delicate, everyday jewelry in gold-tone and freshwater pearl. Gift-ready packaging on every order.', whatSells: 'Necklaces, earrings, rings' },
     { id: 's_4', ownerId: 'u_s4', name: 'Bella Totes & Steps', city: 'Port Harcourt', categories: ['bags', 'shoes'], bio: 'Handbags and heels that go from office to owambe. Quality leather, comfortable fits.', whatSells: 'Handbags, heels, sandals' },
   ];
@@ -77,8 +77,8 @@ function seed() {
     ['s_2', 'Velvet Matte Lipstick Set (6pc)', 'makeup', 9500, 30, 'Six long-wearing matte shades from nude to berry. Enriched with vitamin E so lips stay soft.'],
     ['s_2', 'Full Glam Makeup Kit', 'makeup', 32000, 6, 'Everything you need: foundation, concealer, palette, brushes, lashes and setting spray in a travel case.'],
     ['s_2', 'Glow Highlighter Palette', 'makeup', 8000, 20, 'Four buildable highlighters from soft champagne to deep bronze. Lights up every skin tone.'],
-    ['s_2', 'Hydrating Sheet Masks (10pc)', 'masks', 6500, 40, 'Hyaluronic acid sheet masks for an instant plump, dewy glow. Ten individually sealed sachets.'],
-    ['s_2', 'Turmeric Clay Face Mask', 'masks', 5000, 25, 'A purifying clay mask with turmeric and aloe to even tone and calm breakouts.'],
+    ['s_2', 'Hydrating Sheet Masks (10pc)', 'underwear', 6500, 40, 'Hyaluronic acid sheet masks for an instant plump, dewy glow. Ten individually sealed sachets.'],
+    ['s_2', 'Turmeric Clay Face Mask', 'underwear', 5000, 25, 'A purifying clay mask with turmeric and aloe to even tone and calm breakouts.'],
     ['s_3', 'Gold Layered Necklace', 'jewelry', 14500, 14, 'Three delicate layered chains in 18k gold-tone, tarnish-resistant and skin-friendly.'],
     ['s_3', 'Pearl Drop Earrings', 'jewelry', 7500, 22, 'Freshwater pearl drops on hypoallergenic posts. A timeless gift.'],
     ['s_3', 'Stackable Ring Set', 'jewelry', 9000, 18, 'Five slim gold-tone rings you can mix, match and stack.'],
@@ -131,6 +131,7 @@ function loadDB() {
       const demoShopIds = data.shops.filter((shop) => shop.demo).map((shop) => shop.id);
       data.products.forEach((product) => {
         if (product.category === 'dresses' || product.category === 'clothes') product.category = 'womenswear';
+        if (product.category === 'masks') product.category = 'underwear';
         const image = DEFAULT_PRODUCT_IMAGES[product.name];
         const legacyImage = LEGACY_DEFAULT_PRODUCT_IMAGES[product.name];
         const images = product.images || [];
@@ -139,8 +140,12 @@ function loadDB() {
         }
       });
       data.shops.forEach((shop) => {
-        if (!(shop.categories || []).some((category) => category === 'dresses' || category === 'clothes')) return;
-        const categories = shop.categories.map((category) => category === 'dresses' || category === 'clothes' ? 'womenswear' : category);
+        if (!(shop.categories || []).some((category) => ['dresses', 'clothes', 'masks'].includes(category))) return;
+        const categories = shop.categories.map((category) => {
+          if (category === 'dresses' || category === 'clothes') return 'womenswear';
+          if (category === 'masks') return 'underwear';
+          return category;
+        });
         shop.categories = categories.filter((category, index) => categories.indexOf(category) === index);
       });
       data.shops.forEach((shop) => {

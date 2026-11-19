@@ -56,6 +56,8 @@ If the site reports that it cannot load message contacts or find `message_contac
 `supabase/migrations/20261119_message_contacts.sql` in the Supabase SQL Editor.
 To merge the Dresses and Clothes categories into Women's clothing while preserving existing listings, run
 `supabase/migrations/20261119_clothing_categories.sql` in the Supabase SQL Editor.
+To replace Face Masks with Underwear and recategorize existing records, run
+`supabase/migrations/20261119_underwear_category.sql` in the Supabase SQL Editor.
 
 Users appear under **Authentication → Users** after they sign up; email confirmation may be required before they can log
 in. Seller application details are saved to `public.seller_applications`.

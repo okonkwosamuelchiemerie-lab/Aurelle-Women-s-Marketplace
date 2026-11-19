@@ -7,6 +7,7 @@ const ICONS = {
   clothes: '<path d="M12 9V7.5a2 2 0 1 0-2-2"/><path d="M12 9l9 7a1 1 0 0 1-.6 1.8H3.6A1 1 0 0 1 3 16z"/>',
   womenswear: '<path d="M9 4h6l1 4 3 2-2 11H7L5 10l3-2z"/><path d="M9 4c0 2 1 3 3 3s3-1 3-3"/>',
   menswear: '<path d="M8 4 12 6l4-2 5 4-3 4-2-1v9H8v-9l-2 1-3-4z"/><path d="M10 5.2 12 8l2-2.8"/>',
+  underwear: '<path d="M5 4h14l1 15-4 2-4-7-4 7-4-2z"/><path d="M5 9h14M8 4v5m8-5v5"/>',
   makeup: '<rect x="8.5" y="12" width="7" height="9" rx="1"/><rect x="9.5" y="8" width="5" height="4"/><path d="M9.5 8l2.5-5 2.5 5"/>',
   jewelry: '<path d="M6 3h12l4 6-10 12L2 9z"/><path d="M2 9h20M9 3l3 6 3-6M12 21L9 9M12 21l3-12"/>',
   bags: '<path d="M5 8h14l1 13H4z"/><path d="M9 8V6a3 3 0 0 1 6 0v2"/>',
@@ -114,6 +115,9 @@ function illustration(cat, c1, c2) {
     menswear: `<path d="M77 36 100 48 123 36 151 54 138 88 125 80 130 216H70L75 80 62 88 49 54Z" fill="${W}"/>
       <path d="M100 48v168M91 68l9 10 9-10" stroke="${G}" stroke-width="3" fill="none"/>
       <circle cx="100" cy="98" r="2" fill="${G}"/><circle cx="100" cy="122" r="2" fill="${G}"/><circle cx="100" cy="146" r="2" fill="${G}"/>`,
+    underwear: `<path d="M48 54h104l-8 154h-36l-8-72-8 72H56z" fill="${W}"/>
+      <path d="M48 54h104l-3 42H51z" fill="${G}"/>
+      <path d="M51 96l49 20 49-20" stroke="${D}" stroke-width="3" fill="none"/>`,
     makeup: `<rect x="62" y="150" width="36" height="64" rx="5" fill="${W}"/>
       <rect x="62" y="132" width="36" height="20" rx="3" fill="${G}"/>
       <path d="M67 132 V100 Q67 86 80 78 Q93 86 93 100 V132 Z" fill="#8f4a32"/>
