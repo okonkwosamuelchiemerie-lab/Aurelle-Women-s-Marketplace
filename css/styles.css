@@ -407,6 +407,8 @@ textarea { resize: vertical; }
   .nav-links .nav-sell { margin-left: 0; }
   .nav-actions { margin-left: auto; }
   .hero { padding: 44px 0 60px; }
+  .hero-visual { height: 460px; max-width: 520px; }
+  .hero-tile { left: 21%; width: 58%; --hero-fan-x: clamp(38px, 10vw, 58px); --hero-fan-y: clamp(66px, 17vw, 88px); }
   .section, .band { padding: 52px 0; }
   .role-grid, .two-col { grid-template-columns: 1fr; }
   .chat { grid-template-columns: 1fr; height: auto; }
